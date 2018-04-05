@@ -10,28 +10,13 @@
 
 {%  block body %}
 
-<div id="root"></div>
-<script>
-    var request = new XMLHttpRequest();
-    request.open('GET', 'http://10.10.6.1:6969/api/v0.1/auth/list.json', true);
-    request.onload = function () {
-      var data = JSON.parse(this.response);
-      if (request.status >= 200 && request.status < 400) {
-      for (var i = 0; i < data.length; i++)
-       {
-       document.getElementById("user").innerHTML = data.output.auth_dump[i].entity;
-       }
-      } else {
-        const errorMessage = document.createElement('marquee');
-        errorMessage.textContent = `Gah, it's not working!`;
-        app.appendChild(errorMessage);
-      }
-    }
-    request.send();
-</script>
-
 <div id="user">
-
+    {{data.status}}
+    <table>
+        {% for datum in data.output.auth_dump %}
+        <tr><td>{{ datum.entity }}<td><tr>
+        {% endfor %}
+    </table>
 </div>
 {%  endblock %}
 </body>

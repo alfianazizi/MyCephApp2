@@ -56,16 +56,20 @@
                 </tr>
               </thead>
                 <tbody>
-        {% for users in users %}
+                {% for datum in data.output.auth_dump %}
+                {% if datum.entity[:6]=="client"%}
+                {% if (datum.entity !="client.admin") and datum.entity[:16] !="client.bootstrap" %}
                 <tr>
-                    <td><a href="adduser/{{users.id}}">{{users.id}}</a> </td>
-                    <td>{{users.key}}</td>
-                    <td>{{users.osd}}</td>
-                    <td>{{users.mon}}</td>
-                    <td>{{users.mds}}</td>
-                    <td> <button class="tombol danger">Delete</button> </td>
+                    <td id="user">{{datum.entity}}</td>
+                    <td>{{datum.key}}</td>
+                    <td>{{datum.caps.osd}}</td>
+                    <td>{{datum.caps.mon}}</td>
+                    <td>{{datum.caps.mds}}</td>
+                    <td> <a href="/AddUser/DelUser/{{datum.entity}}"> Delete </a></td>
                 </tr>
-        {% endfor %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
         </tbody>
         </ul>
     <br>

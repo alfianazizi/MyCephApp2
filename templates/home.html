@@ -12,18 +12,28 @@
       </div>
 <p id="test"></p>
 
-<script>
-var request = new XMLHttpRequest();
-request.open('GET', '10.10.6.1:5000/api/v0.1/health.json', true);
-request.onload = function () {
-	// begin accessing JSON data here
-		for (var i = 0; i < data.length; i++) {
-		console.log(status[i]);
-	}
-}
-request.send();
+ <div class="panel panel-primary">
+      <div class="panel-heading cd-collapsable">
+        <h3 class="panel-title">
+          Ceph Cluster Overall Status : {{data.output.overall_status}}
+        </h3>
+      </div>
+</div>
 
-</script>
+ <!--START CEPH MONITOR STATUS-->
+    <div class="panel panel-primary">
+      <div class="panel-heading cd-collapsable">
+        <h3 class="panel-title">
+          Ceph Cluster Monitor Status : {{data.output.overall_status}}
+        </h3>
+      </div>
+      <div class="panel-body">
+        <!--here we add the monitor status-->
+        <div class="row" id="monitor_status"></div>
+      </div>
+    </div>
+<!--END CEPH MONITOR STATUS-->
+
 </body>
 
 
